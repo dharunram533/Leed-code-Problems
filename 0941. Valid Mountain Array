@@ -1,0 +1,46 @@
+Given an array of integers arr, return true if and only if it is a valid mountain array.
+Recall that arr is a mountain array if and only if:
+arr.length >= 3
+There exists some i with 0 < i < arr.length - 1 such that:
+arr[0] < arr[1] < ... < arr[i - 1] < arr[i] 
+arr[i] > arr[i + 1] > ... > arr[arr.length - 1]
+
+
+SOURCE CODE:
+bool validMountainArray(int* arr, int arrSize){
+     if(arrSize < 3){
+            return false;
+         }
+    int *left=&arr[0];
+    int *right=&arr[arrSize-1];
+    int *i=left;
+    int *j=right;
+    
+    while(i<j){
+         while(i<right && *i<*(i+1)){
+            i++;
+         }
+         while(j>left && *j<*(j-1)){
+            j--;
+         }
+         break;
+    }
+    if(i==left || j==right){
+        return false;
+    }
+    return i==j;
+}
+
+OUTPUT:
+Example 1:
+
+Input: arr = [2,1]
+Output: false
+Example 2:
+
+Input: arr = [3,5,5]
+Output: false
+Example 3:
+
+Input: arr = [0,3,2,1]
+Output: true
