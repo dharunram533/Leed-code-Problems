@@ -1,0 +1,44 @@
+Given the head of a sorted linked list, delete all duplicates such that each element appears only once. Return the linked list sorted as well.
+
+SOURCE CODE:
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+struct ListNode* deleteDuplicates(struct ListNode* head) {
+    struct ListNode *temp=head;
+    struct ListNode *newhead=NULL;
+    struct ListNode *tail=NULL;
+    while(temp!=NULL){
+         struct ListNode *newnode=malloc(sizeof(struct ListNode));
+         if( temp->next ==NULL || temp->val != temp->next->val){
+            newnode->val=temp->val;
+            newnode->next=NULL;
+            if(newhead==NULL){
+                newhead=newnode;
+            }
+            else{
+                tail->next=newnode;
+            }
+            tail=newnode;
+          }
+        
+    temp=temp->next;
+
+  }
+  return newhead;
+}
+
+OUTPUT:
+Example 1:
+
+Input: head = [1,1,2]
+Output: [1,2]
+
+Example 2:
+
+Input: head = [1,1,2,3,3]
+Output: [1,2,3]
