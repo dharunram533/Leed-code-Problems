@@ -1,0 +1,59 @@
+Given the head of a singly linked list, return true if it is a palindrome or false otherwise.
+
+SOURCE CODE:
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+bool isPalindrome(struct ListNode* head) {
+    struct ListNode *temp=head;
+    struct ListNode *newhead=NULL;
+    struct ListNode *tail=NULL;
+    while(temp!=NULL){
+        struct ListNode *newnode=malloc(sizeof(struct ListNode));
+        newnode->val=temp->val;
+        newnode->next=NULL;
+        if(newhead == NULL){
+            newhead=newnode;
+        }
+        else{
+            tail->next=newnode;
+        }
+        tail=newnode;
+        temp=temp->next;
+    }
+    temp=head;
+    struct ListNode* cur;
+    struct ListNode* pre;
+    struct ListNode* next;
+    cur=newhead;
+    pre=NULL;
+    while(cur!=NULL){
+        next=cur->next;
+        cur->next=pre;
+        pre=cur;
+        cur=next;
+    }
+    while(temp!=NULL && pre!=NULL){
+        if(temp->val != pre->val){
+            return false;
+        }
+        temp=temp->next;
+        pre=pre->next;
+    }
+    return true;
+}
+
+OUTPUT:
+Example 1:
+
+Input: head = [1,2,2,1]
+Output: true
+
+Example 2:
+
+Input: head = [1,2]
+Output: false
